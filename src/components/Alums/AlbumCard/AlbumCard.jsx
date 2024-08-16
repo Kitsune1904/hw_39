@@ -2,11 +2,6 @@ import classes from "./AlbumCard.module.css"
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
-AlbumCard.propTypes = {
-  card: PropTypes.object
-}
-
-
 export const AlbumCard = (props) => {
   return (
     <div>
@@ -18,4 +13,6 @@ export const AlbumCard = (props) => {
   );
 };
 
-
+AlbumCard.propTypes = {
+  card: PropTypes.object
+}
