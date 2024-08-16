@@ -10,7 +10,7 @@ import {AlbumsProvider} from "./context/AlbumsProvider.jsx";
 function App() {
   return (
     <AlbumsProvider>
-      <BrowserRouter basename={"/hw_38"}>
+      <BrowserRouter basename={"/hw_39"}>
         <Navigation></Navigation>
         <Routes>
           <Route path={'/'} element={<Main/>}></Route>
@@ -21,7 +21,6 @@ function App() {
         <Outlet/>
       </BrowserRouter>
     </AlbumsProvider>
-
   );
 }
 
