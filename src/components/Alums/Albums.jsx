@@ -1,18 +1,22 @@
 import classes from "./Albums.module.css"
 import {AlbumCard} from "./AlbumCard/AlbumCard.jsx";
-import {useContext} from "react";
-import {AlbumsContext} from "../../context/AlbumsProvider.jsx";
+import {Await, useLoaderData} from "react-router-dom";
+import {Suspense} from "react";
 
 const Albums = () => {
-  const data = useContext(AlbumsContext);
+  const {albums} = useLoaderData()
 
   return (
-    data ?
-      <div className={classes.albumHolder}>
-        {data && data.map((el, index) => <AlbumCard card={el} key={index}></AlbumCard>)}
-      </div> :
-      <div>Loading...</div>
-  );
+    <div className={classes.albumHolder}>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Await resolve={albums}>
+          {
+            (resolvedAl) => resolvedAl.map((el, index) => <AlbumCard card={el} key={index}></AlbumCard>)
+          }
+        </Await>
+      </Suspense>
+    < /div>
+  )
 };
 
 export default Albums;

@@ -1,26 +1,30 @@
 import "./App.css";
-import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";
-import Albums from "./components/Alums/Albums.jsx";
-import {About} from "./components/About/About.jsx";
-import {Navigation} from "./components/Navigation/Navigation.jsx";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
+import {Page} from "./Page.jsx";
 import {Main} from "./components/Main/Main.jsx";
+import {About} from "./components/About/About.jsx";
+import Albums from "./components/Alums/Albums.jsx";
 import {Details} from "./components/Alums/Details/Details.jsx";
-import {AlbumsProvider} from "./context/AlbumsProvider.jsx";
+import {albumsLoader} from "./loaders/albumsLoader.jsx";
+
+const pageRouter = createBrowserRouter(createRoutesFromElements(
+  <Route path={'/'} element={<Page/>}>
+    <Route index element={<Main/>}></Route>
+    <Route path={'/about'} element={<About/>}></Route>
+    <Route path={'/albums'}
+           element={<Albums/>}
+           loader={albumsLoader}>
+    </Route>
+    <Route path={'/albums/:id'} element={<Details/>}></Route>
+  </Route>
+))
+
 
 function App() {
   return (
-    <AlbumsProvider>
-      <BrowserRouter basename={"/hw_39"}>
-        <Navigation></Navigation>
-        <Routes>
-          <Route path={'/'} element={<Main/>}></Route>
-          <Route path={'/about'} element={<About/>}></Route>
-          <Route path={'/albums'} element={<Albums/>}></Route>
-          <Route path={'/albums/:id'} element={<Details/>}></Route>
-        </Routes>
-        <Outlet/>
-      </BrowserRouter>
-    </AlbumsProvider>
+    <>
+      <RouterProvider router={pageRouter}/>
+    </>
   );
 }
 

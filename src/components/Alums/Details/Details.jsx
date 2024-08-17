@@ -48,7 +48,7 @@ export const Details = () => {
   return (
     <div className={classes.detailsHolder}>
       {
-        details && details.map((el, index) => {
+        details ? details.map((el, index) => {
           return (
             <div key={index}>
               <p>{el.title}</p>
@@ -62,7 +62,8 @@ export const Details = () => {
               </div>
             </div>
           )
-        })
+        }):
+        <h2>Loading...</h2>
       }
     </div>
   )
